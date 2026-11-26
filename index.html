@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102A43">
+  <title>NIPA SOLUCIONES | Diagnóstico técnico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar" aria-label="Navegación principal">
+    <a class="brand" href="#" aria-label="NIPA SOLUCIONES">
+      <span class="brand-mark"><span></span></span>
+      <span>NIPA <b>SOLUCIONES</b></span>
+    </a>
+    <nav class="nav-list">
+      <button class="nav-item active" data-view="diagnostico"><span class="nav-icon">⌕</span>Diagnóstico rápido</button>
+      <button class="nav-item" data-view="equipos"><span class="nav-icon">▣</span>Mis equipos <span class="nav-count" id="equipmentCount">0</span></button>
+      <button class="nav-item" data-view="seguimiento"><span class="nav-icon">◷</span>Seguimiento</button>
+    </nav>
+    <div class="sidebar-footer">
+      <span class="status-dot"></span>
+      <div><small>Sistema</small><strong>Local seguro</strong></div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">CENTRO DE SOPORTE</p>
+        <h1 id="pageTitle">Diagnóstico rápido</h1>
+      </div>
+      <button class="primary-button" id="newEquipmentButton"><span>＋</span> Nuevo equipo</button>
+    </header>
+
+    <section class="view active" id="diagnosticoView">
+      <div class="diagnostic-layout">
+        <article class="card symptom-card">
+          <div class="step-label"><span>1</span> Seleccione el síntoma</div>
+          <div class="search-wrap">
+            <span>⌕</span>
+            <input id="symptomSearch" type="search" placeholder="Buscar problema, código o subsistema…" autocomplete="off">
+          </div>
+          <div class="symptom-list" id="symptomList"></div>
+        </article>
+
+        <article class="card result-card" id="resultCard">
+          <div class="empty-state">
+            <div class="empty-icon">⌕</div>
+            <h2>Seleccione un síntoma</h2>
+            <p>Elija el problema más parecido para ver la causa probable y el procedimiento seguro.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="view" id="equiposView">
+      <div class="section-toolbar">
+        <div><p class="eyebrow">BASE DE DATOS LOCAL</p><h2>Equipos registrados</h2></div>
+        <button class="secondary-button" id="exportEquipmentButton">Exportar registros</button>
+      </div>
+      <div class="equipment-grid" id="equipmentGrid"></div>
+    </section>
+
+    <section class="view" id="seguimientoView">
+      <div class="section-toolbar">
+        <div><p class="eyebrow">HISTORIAL</p><h2>Seguimiento de servicios</h2></div>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="equipmentModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="equipmentModalTitle">
+      <div class="modal-header">
+        <div><p class="eyebrow">REGISTRO DE TALLER</p><h2 id="equipmentModalTitle">Nuevo equipo</h2></div>
+        <button class="icon-button" id="closeModal" aria-label="Cerrar">×</button>
+      </div>
+      <form id="equipmentForm">
+        <input type="hidden" id="equipmentId">
+        <div class="form-grid">
+          <label>Nombre o etiqueta<span>*</span><input id="equipmentName" required placeholder="Ej. Laptop recepción"></label>
+          <label>Marca / modelo<span>*</span><input id="equipmentModel" required placeholder="Ej. HP ProBook 450"></label>
+          <label>Número de serie<input id="equipmentSerial" placeholder="S/N o IMEI"></label>
+          <label>Propietario / cliente<input id="equipmentOwner" placeholder="Nombre del responsable"></label>
+          <label>Tipo de equipo<select id="equipmentType"><option>Portátil</option><option>PC de escritorio</option><option>Impresora</option><option>Otro</option></select></label>
+          <label>Estado<select id="equipmentStatus"><option>Diagnóstico</option><option>En reparación</option><option>Esperando piezas</option><option>Terminado</option><option>Entregado</option></select></label>
+        </div>
+        <label class="full-label">Notas y observaciones<textarea id="equipmentNotes" rows="3" placeholder="Síntomas iniciales, accesorios, condición física…"></textarea></label>
+        <div class="modal-actions"><button type="button" class="secondary-button" id="cancelModal">Cancelar</button><button type="submit" class="primary-button">Guardar equipo</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
